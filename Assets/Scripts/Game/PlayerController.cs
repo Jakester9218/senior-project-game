@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public List<bool> jumpBuffer;
     public float boundingBoxConstriction;
     public float playerRepulsion;
+    public bool facingRight = true;
 
     private Vector2 movementInput = Vector2.zero;
     private bool jumpInput = false;
@@ -62,6 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         
         horizontalInput = movementInput.x;
+        if ((horizontalInput < 0 && facingRight) || (horizontalInput > 0 && !facingRight))
+        {
+            facingRight = !facingRight;
+            gameObject.transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
         jumpBuffer.RemoveAt(0);
         jumpBuffer.Add(jumpInput);
         quickTurnBuffer.RemoveAt(0);

@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "IncreaseHealth",
+                    "type": "Button",
+                    "id": "3d8965ad-3f28-42cf-ad01-4bd527aacbdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DecreaseHealth",
+                    "type": "Button",
+                    "id": "022509fc-f533-41da-a0a6-14096574ef4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -80,6 +98,17 @@
                 },
                 {
                     "name": "",
+                    "id": "792b1376-7062-4482-bb76-98888eab5699",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1d9d4096-491d-4262-9639-149185628268",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
@@ -97,6 +126,105 @@
                     "processors": "",
                     "groups": "Controller2",
                     "action": "Movement2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "WASD",
+                    "id": "8a482920-2df7-4d53-a870-b8d44ff23290",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement2",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "820ebc73-bf8e-4998-81b6-3600ef1be459",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "Movement2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "a61699f5-c977-41de-bc67-5339d1aecc11",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "Movement2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "24abbcd2-bca8-454b-904e-1935fbe55929",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "Movement2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "eda2200b-3f59-4236-bf54-27602362318d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "Movement2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d7cd83bd-a0a5-470e-b57e-1d88f310d212",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1;Controller2",
+                    "action": "IncreaseHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e16dace-f229-47a3-95d1-8445caa6fdff",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "IncreaseHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad88b021-187e-494a-b4eb-90dcb3c94402",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1;Controller2",
+                    "action": "DecreaseHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cbeda21-7170-4e0d-8c7b-ffcf133980ba",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
+                    "action": "DecreaseHealth",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -121,6 +249,17 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard1",
+            "bindingGroup": "Keyboard1",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }
