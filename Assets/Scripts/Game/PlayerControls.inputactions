@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MainAttack",
+                    "type": "Button",
+                    "id": "6cff55cf-2528-4987-965d-597fe58198f8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller2",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c671ae57-f04b-46e0-9e9c-fb9b378a1b9c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -225,6 +245,28 @@
                     "processors": "",
                     "groups": "Keyboard1",
                     "action": "DecreaseHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "572015bb-827e-459e-90ee-18fb8e90966f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1",
+                    "action": "MainAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7f974f7-3204-41ba-9dbb-964a727ac5c5",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller2",
+                    "action": "MainAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

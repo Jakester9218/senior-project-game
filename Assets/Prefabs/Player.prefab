@@ -180,19 +180,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8158389211815427687}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 94d23575-3997-490f-89ae-ad6adfdb3491
     m_ActionName: Player/Movement
   - m_PersistentCalls:
@@ -259,6 +247,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 022509fc-f533-41da-a0a6-14096574ef4c
     m_ActionName: Player/DecreaseHealth
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -862873792290828682}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: OnWeaponAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6cff55cf-2528-4987-965d-597fe58198f8
+    m_ActionName: Player/MainAttack[/DualShock4GamepadHID/buttonEast]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -281,3 +285,6 @@ MonoBehaviour:
   assignedPlayer: 0
   gameManager: {fileID: 0}
   healthBarManager: {fileID: 0}
+  availableAttacks:
+  - {fileID: 11400000, guid: 91ad145390d98f2409f96f3035a814ac, type: 2}
+  ableToAttack: 0

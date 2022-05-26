@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     public List<bool> jumpBuffer;
     public float boundingBoxConstriction;
     public float playerRepulsion;
-    public bool facingRight = true;
+    public bool facingRight;
+    public GameManager gm;
 
     private Vector2 movementInput = Vector2.zero;
     private bool jumpInput = false;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        facingRight = true;
         rb = gameObject.GetComponent<Rigidbody>();
         for (int i = 0; i < quickTurnBufferSize; i++)
         {
@@ -63,11 +66,6 @@ public class PlayerController : MonoBehaviour
     {
         
         horizontalInput = movementInput.x;
-        if ((horizontalInput < 0 && facingRight) || (horizontalInput > 0 && !facingRight))
-        {
-            facingRight = !facingRight;
-            gameObject.transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
         jumpBuffer.RemoveAt(0);
         jumpBuffer.Add(jumpInput);
         quickTurnBuffer.RemoveAt(0);
@@ -104,6 +102,7 @@ public class PlayerController : MonoBehaviour
             if (quickTurn)
             {
                 rb.velocity = new Vector3(-rb.velocity.x, rb.velocity.y, 0);
+                
             }
             rb.AddForce(new Vector3(moveSpeed * horizontalInput * acceleration * Time.deltaTime * controlFactor, 0, 0), ForceMode.Impulse);
         }
@@ -124,6 +123,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
+
+        if (isGrounded && gameObject.GetComponent<PlayerCombat>().ableToAttack)
+        {
+            if (facingRight && horizontalInput < 0)
+            {
+                facingRight = false;
+            }
+            else if (!facingRight && horizontalInput > 0)
+            {
+                facingRight = true;
+            }
+        }
+
         if (jumpInput)
         {
             if (remainingJumps >= 1 || isGrounded)
@@ -186,9 +198,20 @@ public class PlayerController : MonoBehaviour
         remainingJumps -= 1;
     }
 
-    void Respawn()
+    public void Respawn()
     {
-        gameObject.transform.position = new Vector3(0, -2, 0);
+        if (gameObject == gm.player1)
+        {
+            gameObject.transform.position = gm.activeLevel.transform.Find("LeftSpawn").localPosition;
+        }
+        else if (gameObject == gm.player2)
+        {
+            gameObject.transform.position = gm.activeLevel.transform.Find("RightSpawn").localPosition;
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(0, 10, 0);
+        }
     }
 
 }
