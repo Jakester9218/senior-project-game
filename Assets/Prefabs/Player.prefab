@@ -137,7 +137,7 @@ MonoBehaviour:
   airControlFactor: 1
   fallSpeedMultiplier: 0
   isGrounded: 0
-  groundingBoxHeight: 0.001
+  groundingBoxHeight: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -153,6 +153,8 @@ MonoBehaviour:
   boundingBoxConstriction: 0.1
   playerRepulsion: 1
   facingRight: 1
+  gm: {fileID: 0}
+  respawnTime: 180
   rb: {fileID: 0}
 --- !u!114 &8239585300178776278
 MonoBehaviour:
@@ -287,4 +289,5 @@ MonoBehaviour:
   healthBarManager: {fileID: 0}
   availableAttacks:
   - {fileID: 11400000, guid: 91ad145390d98f2409f96f3035a814ac, type: 2}
+  isDead: 0
   ableToAttack: 0

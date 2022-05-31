@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public float playerRepulsion;
     public bool facingRight;
     public GameManager gm;
+    public int respawnTime;
 
     private Vector2 movementInput = Vector2.zero;
     private bool jumpInput = false;
@@ -152,9 +153,9 @@ public class PlayerController : MonoBehaviour
             fastFalling = true;
         }
 
-        if (gameObject.transform.position.y < -10)
+        if (gameObject.transform.position.y < -10 && !gameObject.GetComponent<PlayerCombat>().isDead)
         {
-            Respawn();
+            StartCoroutine(gameObject.GetComponent<PlayerCombat>().OnDeath(respawnTime));
         }
 
        
@@ -202,11 +203,13 @@ public class PlayerController : MonoBehaviour
     {
         if (gameObject == gm.player1)
         {
-            gameObject.transform.position = gm.activeLevel.transform.Find("LeftSpawn").localPosition;
+            gameObject.transform.position = gm.activeLevel.transform.Find("LeftSpawn").position;
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + gm.camera.transform.position.x, gameObject.transform.position.y, gm.transform.position.z);
         }
         else if (gameObject == gm.player2)
         {
-            gameObject.transform.position = gm.activeLevel.transform.Find("RightSpawn").localPosition;
+            gameObject.transform.position = gm.activeLevel.transform.Find("RightSpawn").position;
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + gm.camera.transform.position.x, gameObject.transform.position.y, gm.transform.position.z);
         }
         else
         {

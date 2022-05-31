@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     public List<BaseAttack> availableAttacks;
     //0: Main Weapon
     //1: Special
+    public bool isDead;
 
 
     public bool ableToAttack;
@@ -41,6 +42,7 @@ public class PlayerCombat : MonoBehaviour
         {
             assignedPlayer = 2;
         }
+        isDead = false;
 
 
     }
@@ -66,6 +68,17 @@ public class PlayerCombat : MonoBehaviour
         ableToAttack = true;
     }
 
+    public IEnumerator OnDeath(int deathFrames)
+    {
+        
+        for (int i = 0; i < deathFrames; i++)
+        {
+            yield return null;
+        }
+        health = startingHealth;
+        gameObject.GetComponent<PlayerController>().Respawn();
+    }
+
     public void AddHealth()
     {
         health += 1;
@@ -85,6 +98,10 @@ public class PlayerCombat : MonoBehaviour
         else if (assignedPlayer == 2)
         {
             hbm.player2Health = health;
+        }
+
+        if (health <= 0 && !isDead) {
+            StartCoroutine(OnDeath(gameObject.GetComponent<PlayerController>().respawnTime));
         }
     }
 

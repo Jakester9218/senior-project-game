@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         }
 
         startLevelIndex = Mathf.RoundToInt(activeLevels.Count / 2)-1;
-        startLevel = levels[startLevelIndex];
+        startLevel = activeLevels[startLevelIndex];
         activeLevel = startLevel;
         leftBoundary = -10;
         rightBoundary = 10;
@@ -84,6 +84,15 @@ public class GameManager : MonoBehaviour
             player1.GetComponent<PlayerController>().Respawn();
             player2.GetComponent<PlayerController>().Respawn();
         }
+        if (activePlayer == player2)
+        {
+            leftBoundary -= 20;
+            rightBoundary -= 20;
+            camera.transform.position = new Vector3(camera.transform.position.x - 20, camera.transform.position.y, camera.transform.position.z);
+            activeLevel = activeLevels[activeLevels.IndexOf(activeLevel) - 1];
+            player1.GetComponent<PlayerController>().Respawn();
+            player2.GetComponent<PlayerController>().Respawn();
+        }
     }
     public void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -92,11 +101,13 @@ public class GameManager : MonoBehaviour
             player1 = playerInput.gameObject;
             player1Joined = true;
             Debug.Log("Player 1 Joined");
+            player1.GetComponent<PlayerController>().Respawn();
         }
         else
         {
             player2 = playerInput.gameObject;
             Debug.Log("Player 2 Joined");
+            player2.GetComponent<PlayerController>().Respawn();
         }
 
     }
