@@ -60,7 +60,7 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator PerformAttack(BaseAttack attack)
     {
         attack.StartAttack(gameObject);
-        while (attack.elapsedDuration < attack.lastActiveFrame)
+        while (attack.elapsedDuration < attack.attackDuration)
         {
             attack.WhileActive(gameObject);
             yield return null;
@@ -70,13 +70,18 @@ public class PlayerCombat : MonoBehaviour
 
     public IEnumerator OnDeath(int deathFrames)
     {
-        
+        isDead = true;
+        gameObject.transform.Find("dave").gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         for (int i = 0; i < deathFrames; i++)
         {
             yield return null;
         }
         health = startingHealth;
+        isDead = false;
         gameObject.GetComponent<PlayerController>().Respawn();
+        gameObject.transform.Find("dave").gameObject.SetActive(true);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void AddHealth()

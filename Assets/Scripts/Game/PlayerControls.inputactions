@@ -217,33 +217,11 @@
                 },
                 {
                     "name": "",
-                    "id": "8e16dace-f229-47a3-95d1-8445caa6fdff",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard1",
-                    "action": "IncreaseHealth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ad88b021-187e-494a-b4eb-90dcb3c94402",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller1;Controller2",
-                    "action": "DecreaseHealth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9cbeda21-7170-4e0d-8c7b-ffcf133980ba",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard1",
                     "action": "DecreaseHealth",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -266,6 +244,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller2",
+                    "action": "MainAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf0b615a-a138-4e03-b303-0e66d25c9686",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard1",
                     "action": "MainAttack",
                     "isComposite": false,
                     "isPartOfComposite": false

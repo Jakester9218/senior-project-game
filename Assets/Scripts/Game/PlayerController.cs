@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public bool facingRight;
     public GameManager gm;
     public int respawnTime;
+    public GameObject dave;
 
     private Vector2 movementInput = Vector2.zero;
     private bool jumpInput = false;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpBuffer.Add(false);
         }
+        Respawn();
     }
 
 
@@ -130,10 +132,12 @@ public class PlayerController : MonoBehaviour
             if (facingRight && horizontalInput < 0)
             {
                 facingRight = false;
+                dave.transform.localScale = new Vector3(dave.transform.localScale.x * -1, dave.transform.localScale.y, dave.transform.localScale.z);
             }
             else if (!facingRight && horizontalInput > 0)
             {
                 facingRight = true;
+                dave.transform.localScale = new Vector3(dave.transform.localScale.x * -1, dave.transform.localScale.y, dave.transform.localScale.z);
             }
         }
 
@@ -156,6 +160,7 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position.y < -10 && !gameObject.GetComponent<PlayerCombat>().isDead)
         {
             StartCoroutine(gameObject.GetComponent<PlayerCombat>().OnDeath(respawnTime));
+            gameObject.GetComponent<PlayerCombat>().isDead = true;
         }
 
        
@@ -185,7 +190,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded)
         {
             isGrounded = true;
-            rb.velocity = new Vector3(horizontalInput * moveSpeed, 0, 0);
+            rb.velocity = new Vector3(horizontalInput * moveSpeed, rb.velocity.y, 0);
         }
         if (jumpBuffer.Contains(true) || jumpInput)
         {
@@ -205,16 +210,19 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = gm.activeLevel.transform.Find("LeftSpawn").position;
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + gm.camera.transform.position.x, gameObject.transform.position.y, gm.transform.position.z);
+            Debug.Log("Player 1 Respawned");
         }
         else if (gameObject == gm.player2)
         {
             gameObject.transform.position = gm.activeLevel.transform.Find("RightSpawn").position;
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + gm.camera.transform.position.x, gameObject.transform.position.y, gm.transform.position.z);
+            Debug.Log("Player 2 Respawned");
         }
         else
         {
             gameObject.transform.position = new Vector3(0, 10, 0);
         }
+        gameObject.GetComponent<PlayerCombat>().isDead = false;
     }
 
 }

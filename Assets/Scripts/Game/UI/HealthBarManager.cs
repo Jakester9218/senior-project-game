@@ -44,25 +44,36 @@ public class HealthBarManager : MonoBehaviour
     {
         if (player1Health > player1LastHealth)
         {
-            player1HealthItems.Add(addHealthItem(player1HealthBar, Color.blue));
+            while (player1HealthItems.Count < player1Health)
+            {
+                player1HealthItems.Add(addHealthItem(player1HealthBar, Color.blue));
+            }
         }
         else if (player1Health < player1LastHealth)
         {
-            var len = player1HealthItems.Count - 1;
-            Destroy(player1HealthItems[len]);
-            player1HealthItems.RemoveAt(len);
+            while (player1HealthItems.Count > player1Health)
+            {
+                var len = player1HealthItems.Count - 1;
+                Destroy(player1HealthItems[len]);
+                player1HealthItems.RemoveAt(len);
+            }
         }
 
         if (player2Health > player2LastHealth)
         {
-            
-            player2HealthItems.Add(addHealthItem(player2HealthBar, Color.red));
+            while (player2HealthItems.Count < player2Health)
+            {
+                player2HealthItems.Add(addHealthItem(player2HealthBar, Color.red));
+            }
         }
         else if (player2Health < player2LastHealth)
         {
-            var len = player2HealthItems.Count - 1;
-            Destroy(player2HealthItems[len]);
-            player2HealthItems.RemoveAt(len);
+            while (player2HealthItems.Count > player2Health)
+            {
+                var len = player2HealthItems.Count - 1;
+                Destroy(player2HealthItems[len]);
+                player2HealthItems.RemoveAt(len);
+            }
         }
         player1LastHealth = player1Health;
         player2LastHealth = player2Health;

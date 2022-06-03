@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8492852380623975412, guid: 9c4550cb2156197418d62246b1aeb726, type: 3}
+  attackOffset: {x: 0.9, y: -0.5, z: 0}
+  attackRotation: {x: -56.31, y: 90, z: 90}
+  attackScale: {x: 2.16, y: 2.16, z: 14.4}
   attackDuration: 20
   CubeOrSphere: 0
   firstActiveFrame: 3
   lastActiveFrame: 17
   boxDimensions: {x: 1, y: 1.5, z: 1}
   relativeBoxPosition: {x: 1.2, y: 0, z: 0}
-  elapsedDuration: 17
+  elapsedDuration: 20
   isMelee: 1
   canHitMultipleTimes: 0
   hitCooldown: 0

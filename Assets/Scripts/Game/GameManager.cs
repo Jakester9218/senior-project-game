@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
@@ -21,15 +22,26 @@ public class GameManager : MonoBehaviour
     public GameObject rightSpawn;
     public int leftBoundary;
     public int rightBoundary;
+    public bool canScreenTransition;
+    public int ScreenTransitionDelay;
+
+    public GameObject player1JoinText;
+    public GameObject player2JoinText;
 
     // Start is called before the first frame update
     void Start()
     {
         ConstructLevel();
+        player1JoinText.SetActive(true);
+        player2JoinText.SetActive(true);
+        canScreenTransition = true;
+        ScreenTransitionDelay = 60;
     }
 
     public void ConstructLevel()
     {
+        Debug.Log("Constructing Level");
+        Random.InitState(System.DateTime.Now.Millisecond);
         unusedLevels = new List<GameObject>();
         activeLevels = new List<GameObject>();
         foreach (var item in levels)
@@ -43,7 +55,7 @@ public class GameManager : MonoBehaviour
             activeLevels.Add(lev);
         }
 
-        startLevelIndex = Mathf.RoundToInt(activeLevels.Count / 2)-1;
+        startLevelIndex = Mathf.RoundToInt(activeLevels.Count / 2);
         startLevel = activeLevels[startLevelIndex];
         activeLevel = startLevel;
         leftBoundary = -10;
@@ -72,28 +84,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public void ScreenTransition(GameObject activePlayer)
     {
-        if (activePlayer == player1)
-        {
-            leftBoundary += 20;
-            rightBoundary += 20;
-            camera.transform.position = new Vector3(camera.transform.position.x + 20, camera.transform.position.y, camera.transform.position.z);
-            activeLevel = activeLevels[activeLevels.IndexOf(activeLevel)+1];
-            player1.GetComponent<PlayerController>().Respawn();
-            player2.GetComponent<PlayerController>().Respawn();
-        }
-        if (activePlayer == player2)
-        {
-            leftBoundary -= 20;
-            rightBoundary -= 20;
-            camera.transform.position = new Vector3(camera.transform.position.x - 20, camera.transform.position.y, camera.transform.position.z);
-            activeLevel = activeLevels[activeLevels.IndexOf(activeLevel) - 1];
-            player1.GetComponent<PlayerController>().Respawn();
-            player2.GetComponent<PlayerController>().Respawn();
-        }
+        Debug.Log("Screen Transitioned");
+            if (activePlayer == player1)
+            {
+                Debug.Log("ST1");
+                leftBoundary += 20;
+                rightBoundary += 20;
+                camera.transform.position = new Vector3(camera.transform.position.x + 20, camera.transform.position.y, camera.transform.position.z);
+                if (activeLevel == activeLevels[activeLevels.Count - 1])
+                {
+                    Debug.Log("GameEnded");
+                    EndGame(player1);
+                }
+                activeLevel = activeLevels[activeLevels.IndexOf(activeLevel) + 1];
+                player1.GetComponent<PlayerController>().Respawn();
+                player2.GetComponent<PlayerController>().Respawn();
+            }
+            if (activePlayer == player2)
+            {
+                Debug.Log("ST2");
+                leftBoundary -= 20;
+                rightBoundary -= 20;
+                camera.transform.position = new Vector3(camera.transform.position.x - 20, camera.transform.position.y, camera.transform.position.z);
+                if (activeLevel == activeLevels[0])
+                {
+                    Debug.Log("GameEnded");
+                    EndGame(player2);
+                }
+                activeLevel = activeLevels[activeLevels.IndexOf(activeLevel) - 1];
+                player1.GetComponent<PlayerController>().Respawn();
+                player2.GetComponent<PlayerController>().Respawn();
+            }
+        
     }
+
+    public void EndGame(GameObject winner)
+    {
+        SceneManager.LoadScene("MainMenu");
+        return;
+    }
+
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         if (!player1Joined)
@@ -101,13 +133,14 @@ public class GameManager : MonoBehaviour
             player1 = playerInput.gameObject;
             player1Joined = true;
             Debug.Log("Player 1 Joined");
-            player1.GetComponent<PlayerController>().Respawn();
+            player1JoinText.SetActive(false);
+
         }
         else
         {
             player2 = playerInput.gameObject;
             Debug.Log("Player 2 Joined");
-            player2.GetComponent<PlayerController>().Respawn();
+            player2JoinText.SetActive(false);
         }
 
     }

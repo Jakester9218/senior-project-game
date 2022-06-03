@@ -6,7 +6,12 @@ using UnityEngine;
 public class BaseAttack : ScriptableObject
 {
     public GameObject attackPrefab;
+    private GameObject activePrefab;
     private GameObject attackOwner;
+
+    public Vector3 attackOffset;
+    public Vector3 attackRotation;
+    public Vector3 attackScale;
 
     public int attackDuration;
     public bool CubeOrSphere;
@@ -24,10 +29,25 @@ public class BaseAttack : ScriptableObject
     public bool canHitMultipleTimes;
     public int hitCooldown;
     private int facingScale;
+    private int previousFacingScale;
 
     public void StartAttack(GameObject player)
     {
         elapsedDuration = 0;
+        activePrefab = Instantiate(attackPrefab, player.transform);
+        activePrefab.transform.localPosition = attackOffset;
+        activePrefab.transform.localRotation = Quaternion.Euler(attackRotation);
+        activePrefab.transform.localScale = attackScale;
+        if (player.GetComponent<PlayerController>().facingRight)
+        {
+            facingScale = 1;
+        }
+        else
+        {
+            facingScale = -1;
+        }
+        activePrefab.transform.localPosition = new Vector3(activePrefab.transform.localPosition.x * facingScale, activePrefab.transform.localPosition.y, activePrefab.transform.localPosition.z);
+        activePrefab.transform.localRotation = Quaternion.Euler(new Vector3(activePrefab.transform.localRotation.eulerAngles.x, activePrefab.transform.localRotation.eulerAngles.y*facingScale, activePrefab.transform.localRotation.eulerAngles.z));
     }
 
     public void WhileActive(GameObject player)
@@ -69,9 +89,10 @@ public class BaseAttack : ScriptableObject
                 }
             }
         }
-        else if (elapsedDuration > lastActiveFrame)
+        else if (elapsedDuration == lastActiveFrame+1)
         {
             //Attack has ended
+            Destroy(activePrefab);
         }
        
     }
